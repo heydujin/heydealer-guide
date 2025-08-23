@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>헤이딜러 차량평가 안내문</title>
+  <style>
+    body { font-family: 'Apple SD Gothic Neo', sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
+    header { background: #1e3a8a; color: white; padding: 1rem; text-align: center; font-size: 1.3rem; font-weight: bold; border-bottom: 4px solid #10b981; }
+    section { background: white; margin: 1rem; padding: 1.2rem; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border-left: 5px solid #1e3a8a; }
+    h2 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #1e3a8a; }
+    ul { padding-left: 1.2rem; margin: 0; }
+    li { margin-bottom: 0.4rem; line-height: 1.4; }
+    .highlight { background: #ecfdf5; padding: 0.8rem; border-radius: 8px; font-weight: bold; color: #065f46; border: 2px solid #10b981; }
+    .emphasis { font-size: 1.1rem; font-weight: bold; color: #d97706; margin-top: 0.8rem; }
+    footer { text-align: center; font-size: 0.85rem; color: #666; padding: 1rem; border-top: 2px solid #1e3a8a; margin-top: 1rem; }
+    form { margin-top: 1rem; }
+    label { display: block; margin: 0.6rem 0 0.2rem; font-weight: bold; color: #1e3a8a; }
+    input, textarea, select { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; }
+    button { margin-top: 1rem; background: #1e3a8a; color: white; padding: 0.7rem 1.2rem; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    button:hover { background: #10b981; }
+    .success-message { display: none; margin-top: 1rem; padding: 0.7rem; background: #d1fae5; color: #065f46; border: 1px solid #10b981; border-radius: 6px; font-weight: bold; }
+  </style>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          document.getElementById('success-message').style.display = 'block';
+          form.reset();
+        } else {
+          alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+      }).catch(() => {
+        alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+      });
+    }
+  </script>
+</head>
+<body>
+  <header>
+    📌 헤이딜러 차량평가 안내
+  </header>
+
+  <section>
+    <h2>🚗 도착 및 일정</h2>
+    <ul>
+      <li>예약 시간 ±15분 이내 도착 예정 (변동 시 사전 안내)</li>
+      <li>차량 점검 특성상 예약 시간 ±30분 여유 필요</li>
+    </ul>
+  </section>
+
+  <section class="highlight">
+    <h2>✨ 비대면 진행 안내</h2>
+    <p>비대면 진행 가능합니다!<br>
+    (차량 키와 등록증을 차량 내에 비치해 주셔야 하며,<br>
+    단 차량 방전 시에는 비대면이 불가합니다.)</p>
+  </section>
+
+  <section>
+    <h2>⚙️ 평가 진행 방식</h2>
+    <form action="https://formspree.io/f/mjkonqen" method="POST" onsubmit="handleSubmit(event)">
+      <label for="evaluation">평가 진행 방식</label>
+      <select id="evaluation" name="평가 진행 방식">
+        <option value="대면">대면</option>
+        <option value="비대면">비대면</option>
+      </select>
+      <button type="submit">제출하기</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>🅿️ 주차 위치 회신 요청</h2>
+    <form action="https://formspree.io/f/mjkonqen" method="POST" onsubmit="handleSubmit(event)">
+      <label for="parking">주차 위치</label>
+      <input type="text" id="parking" name="주차 위치" placeholder="예: 지하1층 101동 / 1번 게이트" required>
+
+      <label for="access">차단시설/방문처 정보</label>
+      <input type="text" id="access" name="차단시설/방문처 정보" placeholder="차단시설이 있는 경우 방문처 정보 (예: 동호수 등)">
+
+      <button type="submit">제출하기</button>
+    </form>
+    <div class="emphasis">차량등록 가능 및 필요시 : 68모5039</div>
+    <div id="success-message" class="success-message">✅ 제출이 완료되었습니다. 감사합니다!</div>
+  </section>
+
+  <section>
+    <h2>📋 고객님 준비사항</h2>
+    <ul>
+      <li>시동 점검 (방전 시 긴급출동 이용)</li>
+      <li>차량 키 & 등록증 실내 비치</li>
+      <li>주차 위치 확보 (넓고 밝은 장소 권장, 실외 우선)</li>
+      <li>트렁크 비우기(필수), 실내 정돈(선택)</li>
+      <li>개인정보·귀중품 정리 (내외부 촬영 있음)</li>
+      <li>차량 장·단점 간단 메모</li>
+      <li>평가 중 고객님은 실내 대기 권장</li>
+      <li>평가 시작 후 발송되는 문진표 작성 (키 수량, 블랙박스 여부 등)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🕒 평가 진행</h2>
+    <ul>
+      <li>소요시간: 약 25~30분</li>
+      <li>점검 항목: 사고 이력, 엔진·미션, 옵션, 내·외관, 하부 점검</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>💰 경매 안내</h2>
+    <ul>
+      <li>평가 완료 후 2시간 내 경매 시작</li>
+      <li>감가·수수료 없음 → 입금 기준 금액 입찰</li>
+      <li>48시간 동안 10~15건 입찰 예상, 실시간 안내</li>
+      <li>경매 종료 후 3일 내 판매 여부 결정</li>
+      <li>판매 결정 후 5일 이내 원하시는 장소·시간에 탁송 진행</li>
+      <li>차량 인도 시 대금 입금 & 명의 이전 헤이딜러 보장</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📨 문의</h2>
+    <ul>
+      <li>일반·행정 문의: 헤이딜러 어플 → 전체 → 채팅문의 → 제로문의 → 직접문의</li>
+    </ul>
+  </section>
+
+  <footer>
+    좋은 가격 받으실 수 있도록 최선을 다해 평가하겠습니다.<br>
+    감사합니다.
+  </footer>
+</body>
+</html>
